@@ -25,6 +25,7 @@ blade + alpinejs on Breeze にて ログイン後の画面に 試合 登録画�
 1. curl https://www.toptal.com/developers/gitignore/api/vim,vue,node,linux,macos,laravel,windows,composer,intellij,sublimetext,visualstudio,visualstudiocode >> .gitignore
 
 ## Laravel Breeze bladeとしての環境構築 (他でも作業できるように ここから別ブランチ作業)
-1. php artisan breeze:install blade --typescript
+1. php artisan breeze:install blade
 
 ※ php artisan breeze:install では bladeで行う
+※ typescriptには対応していない... alpinejs

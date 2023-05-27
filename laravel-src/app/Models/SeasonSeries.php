@@ -5,10 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * (Mリーグ シーズン)シリーズ モデル
+ */
 class SeasonSeries extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+    // モデルテーブル名
+    protected $table = 'season_series';
     // 登録更新できないフィールド
     protected $guarded = ['id'];
     // 登録更新する際に設定できる項目(カラム)

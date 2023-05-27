@@ -10,10 +10,15 @@
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
+                <!-- ヘッダー Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <!-- ナビゲーションリンク: Dashboard -->
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
+                    </x-nav-link>
+                    <!-- ナビゲーションリンク: 試合 -->
+                    <x-nav-link :href="route('game.index')" :active="request()->routeIs(['game.index'])">
+                        {{ __('Game') }}
                     </x-nav-link>
                 </div>
             </div>

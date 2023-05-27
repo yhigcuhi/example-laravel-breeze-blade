@@ -6,6 +6,7 @@ use App\Enums\Direction;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * シリーズ 試合出場選手 モデル
@@ -13,6 +14,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class SeasonSeriesGamePlayer extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+    // モデルテーブル名
+    protected $table = 'season_series_game_players';
     // 登録更新できないフィールド
     protected $guarded = ['id'];
     // 登録更新する際に設定できる項目(カラム)
@@ -37,7 +41,7 @@ class SeasonSeriesGamePlayer extends Model
     ];
     // with
     protected $with = [
-        // 'player',
+        'player',
         'seasonSeriesGamePlayerTotalStat',
     ];
 

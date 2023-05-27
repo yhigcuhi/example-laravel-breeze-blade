@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('title')->comment('試合 画面表示名');
             $table->date('game_day')->comment('試合日');
             $table->integer('how_many_games')->comment('何試合目');
+            // deleted_at
+            $table->softDeletes();
             // created_at, updated_at
             $table->timestamps();
             // テーブル名

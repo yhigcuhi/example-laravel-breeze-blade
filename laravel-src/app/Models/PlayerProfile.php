@@ -6,6 +6,7 @@ use App\Enums\Gender;
 use App\Enums\Organization;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * 選手(Mリーガー) プロフィール マスタ
@@ -13,7 +14,9 @@ use Illuminate\Database\Eloquent\Model;
 class PlayerProfile extends Model
 {
     use HasFactory;
-    /* 定数 */
+    use SoftDeletes;
+    // モデルテーブル名
+    protected $table = 'player_profiles';
     // 登録更新できないフィールド
     protected $guarded = ['id'];
     // 登録更新する際に設定できる項目(カラム)

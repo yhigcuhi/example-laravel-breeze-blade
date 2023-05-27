@@ -29,6 +29,8 @@ return new class extends Migration
             $table->date('birthday')->nullable()->comment('誕生日'); //年がわからない人はnull
             $table->string('date_of_birth')->comment('誕生日 月日'); //誕生日 月日だけ文字(MM/dd) ※ 年が不明な選手いるので こちらを必須
             $table->enum('organization', collect(Organization::cases())->map(fn($e) => $e->name)->all())->comment('所属団体'); // Mリーガーのいる分だけ ChatGPTで物理名決めた
+            // deleted_at
+            $table->softDeletes();
             // created_at, updated_at
             $table->timestamps();
             // テーブル名

@@ -22,6 +22,8 @@ return new class extends Migration
             $table->bigInteger('season_series_game_id')->comment('試合ID');
             $table->string('player_code')->comment('(出場)選手コード');
             $table->enum('direction', collect(Direction::cases())->map(fn($e) => $e->name)->all())->comment('席順(東家など)の風');
+            // deleted_at
+            $table->softDeletes();
             // created_at, updated_at
             $table->timestamps();
             // テーブル名

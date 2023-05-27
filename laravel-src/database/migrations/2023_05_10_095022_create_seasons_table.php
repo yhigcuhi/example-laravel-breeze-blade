@@ -20,6 +20,8 @@ return new class extends Migration
             // フィールド
             $table->string('season_code')->unique()->comment('シーズンコード'); // TODO: PKにするか？
             $table->string('title')->comment('画面表示名');
+            // deleted_at
+            $table->softDeletes();
             // created_at, updated_at
             $table->timestamps();
             // テーブル名

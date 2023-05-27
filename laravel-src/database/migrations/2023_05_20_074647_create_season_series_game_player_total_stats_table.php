@@ -21,6 +21,8 @@ return new class extends Migration
             $table->bigInteger('season_series_game_player_id')->comment('試合出場選手ID');
             $table->float('total_point', 5, 1)->comment('最終ポイント'); // ドメイン = 着順ボーナス + (整数部4桁,少数部1桁)(1000点1ポイント)(±あり)
             // TODO:細かいところは省く
+            // deleted_at
+            $table->softDeletes();
             // created_at, updated_at
             $table->timestamps();
             // テーブル名

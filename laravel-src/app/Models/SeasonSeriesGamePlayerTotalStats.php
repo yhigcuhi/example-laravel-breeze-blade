@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * シリーズ 試合出場選手 成績 モデル
@@ -11,6 +12,9 @@ use Illuminate\Database\Eloquent\Model;
 class SeasonSeriesGamePlayerTotalStats extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+    // モデルテーブル名
+    protected $table = 'season_series_game_player_total_stats';
     // 登録更新できないフィールド
     protected $guarded = ['id'];
     // 登録更新する際に設定できる項目(カラム)

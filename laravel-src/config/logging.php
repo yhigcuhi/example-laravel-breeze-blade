@@ -54,8 +54,39 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            // ログ出力をレベル別に
+            'channels' => ['debug', 'info', 'warning', 'error'],
             'ignore_exceptions' => false,
+        ],
+
+        // ログレベル別のログ出力
+        // Level DEBUG
+        'debug' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/laravel.debug.log'),
+            'level' => 'debug',
+            'replace_placeholders' => true,
+        ],
+        // Level INFO
+        'info' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/laravel.info.log'),
+            'level' => 'info',
+            'replace_placeholders' => true,
+        ],
+        // Level WARNING
+        'warning' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/laravel.warning.log'),
+            'level' => 'warning',
+            'replace_placeholders' => true,
+        ],
+        // Level ERROR
+        'error' => [
+            'driver' => 'errorlog',
+            'path' => storage_path('logs/laravel.error.log'),
+            'level' => 'error',
+            'replace_placeholders' => true,
         ],
 
         'single' => [

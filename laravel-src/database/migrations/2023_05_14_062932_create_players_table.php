@@ -20,6 +20,8 @@ return new class extends Migration
             // フィールド
             $table->string('player_code')->unique()->comment('選手コード'); // TODO: PKにするか？
             $table->string('name')->comment('名前'); // レコードの違いを 分かりやすくするよう
+            // deleted_at
+            $table->softDeletes();
             // created_at, updated_at
             $table->timestamps();
             // テーブル名

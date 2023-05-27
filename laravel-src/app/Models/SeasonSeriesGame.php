@@ -2,16 +2,21 @@
 
 namespace App\Models;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * シリーズ 試合 モデル
+ * (Mリーグ シーズン)シリーズ 試合 モデル
  */
 class SeasonSeriesGame extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+    // モデルテーブル名
+    protected $table = 'season_series_games';
     // 登録更新できないフィールド
     protected $guarded = ['id'];
     // 登録更新する際に設定できる項目(カラム)
@@ -38,9 +43,10 @@ class SeasonSeriesGame extends Model
     ];
     // with
     protected $with = [
-        // 'series',
         'seasonSeriesGamePlayers',
     ];
+    // シリアライズに追加する項目
+    protected $appends = ['game_day_md'];
 
     /** リレーション */
     /**
@@ -50,5 +56,13 @@ class SeasonSeriesGame extends Model
     public function seasonSeriesGamePlayers(): HasMany
     {
         return $this->hasMany(SeasonSeriesGamePlayer::class, 'season_series_game_id');
+    }
+
+    /**
+     * @return string 試合日の m月d日形式
+     */
+    public function getGameDayMdAttribute(): string
+    {
+        return CarbonImmutable::parse($this->game_day)->format('m月d日');
     }
 }

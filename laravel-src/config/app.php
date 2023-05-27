@@ -70,7 +70,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Tokyo',
 
     /*
     |--------------------------------------------------------------------------
@@ -83,7 +83,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ja',
 
     /*
     |--------------------------------------------------------------------------
@@ -182,6 +182,11 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        // 各Enum alias登録
+        'Direction' => App\Enums\Direction::class,
+        'Gender' => App\Enums\Gender::class,
+        'Organization' => App\Enums\Organization::class,
+        'SeriesCategory' => App\Enums\SeriesCategory::class,
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 

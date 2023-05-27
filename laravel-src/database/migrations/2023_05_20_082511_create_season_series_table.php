@@ -24,6 +24,8 @@ return new class extends Migration
             $table->enum('series_category', collect(SeriesCategory::cases())->map(fn($e) => $e->name)->all())->comment('シリーズ カテゴリー');
             $table->date('start_day')->nullable()->comment('シリーズ 期間 開始日'); // 決まっていない:null
             $table->date('end_day')->nullable()->comment('シリーズ 期間 終了日'); // 決まっていない:null
+            // deleted_at
+            $table->softDeletes();
             // created_at, updated_at
             $table->timestamps();
             // テーブル名

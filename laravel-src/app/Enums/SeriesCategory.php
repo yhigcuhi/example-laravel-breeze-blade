@@ -8,6 +8,8 @@ namespace App\Enums;
  */
 enum SeriesCategory
 {
+    use ValueOf;
+    // 定義
     case REGULAR;
     case SEMI_FINAL;
     case FINAL;

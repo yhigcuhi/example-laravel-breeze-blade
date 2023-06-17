@@ -8,6 +8,8 @@ namespace App\Enums;
  */
 enum Gender
 {
+    use ValueOf;
+    // 定義
     case MEN;
     case WOMEN;
 

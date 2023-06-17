@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\SeasonSeriesGame;
 use App\Repositories\SeasonSeriesGameRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -32,5 +33,23 @@ class SeasonSeriesGameService
     {
         // 検索実行
         return $this->repository->findPaginatorBy($conditions, $perPage);
+    }
+
+    public function findById(?int $id): ?SeasonSeriesGame
+    {
+        // 前提条件
+        if (!$id) return null;
+        // ID検索
+        return $this->repository->findById($id);
+    }
+
+    /**
+     * 新規登録 実行
+     * @param array $inputs 登録値
+     * @return SeasonSeriesGame 登録結果
+     */
+    public function create(array $inputs = []): SeasonSeriesGame
+    {
+        return $this->repository->create($inputs);
     }
 }

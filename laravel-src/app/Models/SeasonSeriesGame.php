@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -47,6 +48,27 @@ class SeasonSeriesGame extends Model
     ];
     // シリアライズに追加する項目
     protected $appends = ['game_day_md'];
+
+    /**
+     * @return void 独自 起動時の処理
+     */
+    protected static function boot()
+    {
+        // super
+        parent::boot();
+
+        // 独自 登録前処理
+        self::creating(function ($model) {
+            // 登録前処理 補完
+            // 試合日
+            $game_day = CarbonImmutable::parse($model->game_day)->format('Ymd');
+            // 試合コード = シリーズコード + - + 試合日(Ymd) + - + 何試合目 + A(一旦固定) 例:2022-23-REGULAR-20221003-1A:(2022-23シーズン)Mリーグ 2022/10/03 1試合目 Aコートの意味
+            $model->game_code = "$model->series_code-$game_day-$model->how_many_games-A";
+
+            // 結果
+            return $model;
+        });
+    }
 
     /** リレーション */
     /**

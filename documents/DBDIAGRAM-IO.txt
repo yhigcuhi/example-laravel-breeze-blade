@@ -3,10 +3,11 @@
 Table season_series_games as SG {
   id int [pk, increment] //シリーズ 試合ID
   series_code varchar [not null, ref: > SR.series_code] // シリーズコード(2022-23-REGULAR:(2022-23シーズン)Mリーグ レギュラーシーズン)
-  game_code varchar [not null, unique] // 試合コード(2022-23-REGULAR-20221003-01A:(2022-23シーズン)Mリーグ 2022/10/03 1試合目 Aコートの意味)
+  game_code varchar [not null, unique] // 試合コード(2022-23-REGULAR-20221003-1A:(2022-23シーズン)Mリーグ 2022/10/03 1試合目 Aコートの意味)
   title varchar [not null] // 試合 画面表示名 (F-7: ファイナルシリーズ 7試合目)
   game_day timestamp [not null] // 試合日
   how_many_games int [not null] // 何試合目
+  // TODO:総局数や流局数などは詳細から計算で考えたい
   created_at timestamp [not null,default: `now()`]
   updated_at timestamp [not null,default: `now()`]
 }

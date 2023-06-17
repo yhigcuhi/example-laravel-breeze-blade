@@ -31,7 +31,9 @@ Route::middleware('auth')->group(function () {
     // シーズン 試合系
     Route::group(['prefix' => '/game', 'as' => 'game.'], function() {
         Route::get('/', [GameController::class, 'index'])->name('index'); // 試合一覧 画面
+        Route::get('/new', [GameController::class, 'create'])->name('create'); // 試合追加 画面
         Route::post('/', [GameController::class, 'search'])->name('search'); // 試合一覧 画面: 検索
+        Route::post('/new', [GameController::class, 'store'])->name('store'); // 試合追加 通信
     });
 });
 

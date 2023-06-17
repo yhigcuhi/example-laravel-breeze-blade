@@ -1,9 +1,10 @@
 @props([
     'classes' => '',
+    'isNoBorder' => false,
     'isNoBorderFooter' => true,
     'bgFooter' => 'bg-white',
 ])
-<div class="card {{ $classes }}">
+<div class="card {{ $classes }}" style="{{ $isNoBorder ? 'border: none;' : '' }}">
     <!-- カードボディ -->
     <div class="card-body">
         <!-- カード：メインコンテンツ -->
@@ -11,7 +12,7 @@
     </div>
     @if (isset($footer))
         <!-- カードフッター -->
-        <div class="card-footer {{ $bgFooter }}" style="{{ $isNoBorderFooter ? 'border: none;' : '' }}">
+        <div class="card-footer {{ $bgFooter }}" style="{{ $isNoBorder || $isNoBorderFooter ? 'border: none;' : '' }}">
             <div class="d-flex flex-wrap justify-end">
                 <!-- カードフッター: slot -->
                 {{ $footer }}

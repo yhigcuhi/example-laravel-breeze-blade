@@ -8,6 +8,8 @@ namespace App\Enums;
  */
 enum Organization
 {
+    use ValueOf;
+    // 定義
     case JPML; //日本プロ麻雀連盟
     case NPM; //日本プロ麻雀協会
     case SAIKOUISEN; //最高位戦日本プロ麻雀協会

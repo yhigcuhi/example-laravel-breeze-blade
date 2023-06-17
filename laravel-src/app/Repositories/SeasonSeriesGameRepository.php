@@ -40,6 +40,30 @@ class SeasonSeriesGameRepository
     }
 
     /**
+     * ID 検索
+     * @param int $id ID
+     * @return SeasonSeriesGame|null 検索結果
+     */
+    public function findById(int $id): ?SeasonSeriesGame
+    {
+        return SeasonSeriesGame::with(['seasonSeriesGamePlayers'])->find($id)->first();
+    }
+
+    /**
+     * 新規登録
+     * @param array $inputs 入力値
+     * @return SeasonSeriesGame 登録結果
+     */
+    public function create(array $inputs = []): SeasonSeriesGame
+    {
+        // 試合情報登録
+        $result = new SeasonSeriesGame($inputs);
+        $result->save(); // 登録実行
+        // 結果返却
+        return $result;
+    }
+
+    /**
      * 指定検索条件から 検索クエリ生成
      * @param array<string, mixed>|null $conditions 検索条件(連想配列) TODO:将来的には ValueObjectでの表現へ
      * @return Builder 検索クエリ
@@ -53,7 +77,7 @@ class SeasonSeriesGameRepository
         // 指定検索条件反映
         // シリーズコード指定
         if (isset($conditions['series_code'])) $builder = $builder->where('series_code', $conditions['series_code']); // 同一
-        if (isset($conditions['series_code_in'])) $builder = $builder->whereIn('series_code', $conditions['series_code']); // 複数
+        if (isset($conditions['series_code_in'])) $builder = $builder->whereIn('series_code', $conditions['series_code_in']); // 複数
         // 検索条件返却
         return $builder;
     }

@@ -8,6 +8,8 @@ namespace App\Enums;
  */
 enum Direction
 {
+    use ValueOf;
+    // 定義
     case EAST;
     case SOUTH;
     case WEST;

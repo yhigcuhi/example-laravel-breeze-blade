@@ -10,7 +10,7 @@
         <!-- 一覧: メニュー -->
         <div class="my-2 d-flex flex-wrap justify-end">
             <div class="col-2 justify-between btn-group">
-                <x-buttons.button-append />
+                <x-buttons.button-append route="game.create"/>
             </div>
         </div>
         <!-- 一覧: 表 -->
@@ -25,35 +25,45 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($games as $index => $game)
-                    <tr>
-                        <th scope="row">
-                            {{ $game->game_day_md }}<br/>
-                            {{ $game->title }}
-                        </th>
-                        @foreach(Direction::cases() as $direction)
-                            @php
-                                // 東南西北ごとの表示
-                                // 出場選手を 東南西北の形へ
-                                $playerByDirection = $game->seasonSeriesGamePlayers->keyBy(fn($item) => $item->direction->name);
-                                // 表示する 東南西北 いずれかの選手
-                                $directionPlayer = $playerByDirection[$direction->name];
-                                // 外だし
-                                $playerName = $directionPlayer?->player->name; // 選手名
-                                $totalPointOfGame = $directionPlayer?->seasonSeriesGamePlayerTotalStat->total_point; // 試合結果 獲得 総ポイント
-                            @endphp
-                            <td>
-                                {{ $playerName }}<br/>
-                                <span class=" {{ $totalPointOfGame < 0 ? 'text-danger' : ''}}">
-                                    {{ $totalPointOfGame }}
-                                </span>
-                            </td>
+                @if(!is_null($games))
+                    @if(!empty($games))
+                        @foreach($games as $game)
+                            <tr>
+                                <th scope="row">
+                                    {{ $game->game_day_md }}<br/>
+                                    {{ $game->title }}
+                                </th>
+                                @foreach(Direction::cases() as $direction)
+                                    @php
+                                        // 東南西北ごとの表示
+                                        // 出場選手を 東南西北の形へ
+                                        $playerByDirection = $game->seasonSeriesGamePlayers->keyBy(fn($item) => $item->direction->name);
+                                        // 表示する 東南西北 いずれかの選手
+                                        $directionPlayer = $playerByDirection[$direction->name];
+                                        // 外だし
+                                        $playerName = $directionPlayer?->player->name; // 選手名
+                                        $totalPointOfGame = $directionPlayer?->seasonSeriesGamePlayerTotalStats->total_point; // 試合結果 獲得 総ポイント
+                                    @endphp
+                                    <td>
+                                        {{ $playerName }}<br/>
+                                        <span class=" {{ $totalPointOfGame < 0 ? 'text-danger' : ''}}">
+                                            {{ $totalPointOfGame }}
+                                        </span>
+                                    </td>
+                                @endforeach
+                                <td>
+                                    <button class="btn btn-outline-dark">→ 詳細</button>
+                                </td>
+                            </tr>
                         @endforeach
-                        <td>
-                            <button class="btn btn-outline-dark">→ 詳細</button>
-                        </td>
-                    </tr>
-                @endforeach
+                    @else
+                        <tr>
+                            <td colspan="6">
+                                該当する結果が見つかりませんでした
+                            </td>
+                        </tr>
+                    @endif
+                @endif
             </tbody>
         </table>
     </div>

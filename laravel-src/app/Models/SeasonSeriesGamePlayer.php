@@ -42,7 +42,7 @@ class SeasonSeriesGamePlayer extends Model
     // with
     protected $with = [
         'player',
-        'seasonSeriesGamePlayerTotalStat',
+        'seasonSeriesGamePlayerTotalStats',
     ];
 
     /** リレーション */
@@ -59,7 +59,7 @@ class SeasonSeriesGamePlayer extends Model
      * シリーズ 試合出場選手 成績
      * @return HasOne|null 試合出場選手 成績
      */
-    public function seasonSeriesGamePlayerTotalStat(): ?HasOne
+    public function seasonSeriesGamePlayerTotalStats(): ?HasOne
     {
         return $this->hasOne(SeasonSeriesGamePlayerTotalStats::class, 'season_series_game_player_id');
     }
